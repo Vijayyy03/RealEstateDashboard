@@ -1,3 +1,8 @@
+# Install latest build tools first
+pip>=25.2
+setuptools>=65.0
+wheel
+
 # Core Python packages
 python-dotenv==1.0.0
 pydantic==2.5.0
@@ -6,6 +11,7 @@ pydantic-settings==2.1.0
 # Web Framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
+gunicorn==21.2.0
 
 # Database
 sqlalchemy==2.0.23
@@ -14,9 +20,9 @@ alembic==1.13.1
 geoalchemy2==0.14.2
 
 # Data Processing
-pandas==2.1.4
-numpy==1.25.2
-geopandas==0.14.1
+pandas==2.2.2
+numpy==1.26.4
+geopandas==0.14.4
 
 # Web Scraping
 scrapy==2.11.0

@@ -18,6 +18,11 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
+# Set environment variables for Streamlit deployment
+os.environ["STREAMLIT_SERVER_PORT"] = os.environ.get("PORT", "8501")
+os.environ["STREAMLIT_SERVER_HEADLESS"] = "true"
+os.environ["STREAMLIT_SERVER_ENABLE_CORS"] = "true"
+
 from config.settings import settings
 from database.connection import db_manager
 from database.models import Property, UnderwritingData, MLScore, MarketData

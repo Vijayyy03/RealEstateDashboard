@@ -1,0 +1,2 @@
+web: gunicorn -w 4 -k uvicorn.workers.UvicornWorker api.main:app --bind 0.0.0.0:$PORT
+dashboard: streamlit run dashboard/main.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false

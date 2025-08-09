@@ -33,13 +33,26 @@ class DatabaseManager:
                 "poolclass": StaticPool,
             }
         else:
-            # Use SQLite for demo
-            database_url = "sqlite:///real_estate_demo.db"
-            engine_kwargs = {
-                "echo": settings.debug,
-                "pool_pre_ping": True,
-                "pool_recycle": 3600,
-            }
+            # Check for DATABASE_URL environment variable (for Render deployment)
+            database_url = os.environ.get("DATABASE_URL")
+            
+            if database_url and database_url.startswith("postgres://"):
+                # Render provides PostgreSQL URLs starting with postgres://, but SQLAlchemy requires postgresql://
+                database_url = database_url.replace("postgres://", "postgresql://", 1)
+                engine_kwargs = {
+                    "echo": settings.debug,
+                    "pool_pre_ping": True,
+                    "pool_recycle": 3600,
+                }
+            else:
+                # Use SQLite for local development
+                database_url = "sqlite:///real_estate_demo.db"
+                engine_kwargs = {
+                    "echo": settings.debug,
+                    "connect_args": {"check_same_thread": False},
+                    "pool_pre_ping": True,
+                    "pool_recycle": 3600,
+                }
         
         self.engine = create_engine(database_url, **engine_kwargs)
         self.SessionLocal = sessionmaker(
