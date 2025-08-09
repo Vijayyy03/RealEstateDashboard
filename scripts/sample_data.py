@@ -67,7 +67,7 @@ def generate_sample_properties():
             'address': f'{street_num} {street_name}',
             'city': city,
             'state': state,
-            'zip_code': f'{random.randint(100001, 999999)}',  # Indian PIN codes are 6 digits
+            'zip_code': f'{random.randint(10001, 99999)}',  # US ZIP codes are 5 digits
             'property_type': random.choice(property_types),
             'bedrooms': random.randint(1, 5),
             'bathrooms': round(random.uniform(1, 4), 1),
@@ -77,26 +77,26 @@ def generate_sample_properties():
             'condition': random.choice(['Excellent', 'Good', 'Fair', 'Needs Work']),
             'features': json.dumps(random.sample(['Parking', 'Gym', 'Power Backup', 'Lift', 'Security', 'Club House', 'Swimming Pool', 'Modular Kitchen'], 
                                     random.randint(0, 4))),
-            'latitude': random.uniform(8.0, 35.0),  # India's latitude range
-            'longitude': random.uniform(68.0, 97.0),  # India's longitude range
+            'latitude': random.uniform(25.0, 49.0),  # US latitude range
+            'longitude': random.uniform(-125.0, -66.0),  # US longitude range
             'source': 'Sample Data',
             'is_active': True
         }
         
-        # Generate realistic pricing based on location and property characteristics for Indian market
-        # Using INR pricing (approximately 75 INR = 1 USD)
+        # Generate realistic pricing based on location and property characteristics for US market
+        # Using USD pricing
         base_price = property_data['square_feet'] * random.uniform(5000, 12000)
         if property_data['property_type'] == 'Multi-Family':
             base_price *= 1.2
         elif property_data['property_type'] == 'Condo':
             base_price *= 0.9
         
-        # Adjust for Indian cities based on real estate market data
+        # Adjust for US cities based on real estate market data
         city_multipliers = {
-            'Mumbai': 1.8, 'Delhi': 1.5, 'Bangalore': 1.4, 'Hyderabad': 1.2,
-            'Chennai': 1.3, 'Kolkata': 1.0, 'Pune': 1.2, 'Ahmedabad': 0.9,
-            'Jaipur': 0.8, 'Lucknow': 0.7, 'Chandigarh': 1.0, 'Kochi': 1.1,
-            'Guwahati': 0.7, 'Bhubaneswar': 0.6, 'Dehradun': 0.8
+            'New York': 2.0, 'San Francisco': 1.8, 'Los Angeles': 1.6, 'Boston': 1.5,
+            'Seattle': 1.4, 'Washington DC': 1.3, 'Chicago': 1.1, 'Miami': 1.2,
+            'Denver': 1.0, 'Austin': 1.1, 'Dallas': 0.9, 'Houston': 0.8,
+            'Phoenix': 0.8, 'Atlanta': 0.9, 'Philadelphia': 1.0
         }
         base_price *= city_multipliers.get(city, 1.0)
         

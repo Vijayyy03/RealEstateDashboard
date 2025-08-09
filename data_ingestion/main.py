@@ -110,10 +110,31 @@ def run_api_data_collection():
     """Run API-based data collection."""
     logger.info("🚀 Starting API data collection...")
     
-    # This would integrate with external APIs like Zillow, Redfin, etc.
-    # For now, we'll just log that it's not implemented
-    logger.info("⚠️ API data collection not implemented yet")
-    return True
+    try:
+        from data_ingestion.propstack_scraper import PropstackScraper
+        
+        # Initialize and run the Propstack scraper
+        logger.info("Initializing Propstack API scraper")
+        scraper = PropstackScraper()
+        
+        # Run the scraper with default parameters
+        # You can customize these parameters as needed
+        success = scraper.run(
+            city="Mumbai",  # Default city to search
+            property_type="Residential",  # Default property type
+            limit=100  # Number of properties to fetch
+        )
+        
+        if success:
+            logger.info("✅ Propstack API data collection completed successfully")
+            return True
+        else:
+            logger.error("❌ Propstack API data collection failed")
+            return False
+            
+    except Exception as e:
+        logger.error(f"❌ API data collection error: {e}")
+        return False
 
 
 def run_underwriting_calculations():
@@ -217,6 +238,10 @@ def run_full_pipeline():
     
     if settings.scraping.zoning_enabled:
         success &= run_zoning_data_scraping()
+        
+    # Run API data collection if enabled
+    if settings.scraping.api_enabled:
+        success &= run_api_data_collection()
     
     # Run underwriting calculations
     success &= run_underwriting_calculations()

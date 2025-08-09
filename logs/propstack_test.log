@@ -1,0 +1,128 @@
+2025-08-09 23:29:42.638 | INFO     | __main__:init_db:36 - Initializing database connection...
+2025-08-09 23:30:03.071 | INFO     | __main__:init_db:36 - Initializing database connection...
+2025-08-09 23:30:03.132 | INFO     | __main__:init_db:38 - Database connection initialized
+2025-08-09 23:30:03.133 | INFO     | __main__:main:93 - 🏗️ PropstackScraper Test Script
+2025-08-09 23:30:03.133 | INFO     | __main__:test_propstack_scraper:43 - Testing PropstackScraper with demo data...
+2025-08-09 23:30:21.356 | INFO     | __main__:init_db:36 - Initializing database connection...
+2025-08-09 23:30:21.367 | INFO     | __main__:init_db:38 - Database connection initialized
+2025-08-09 23:30:21.382 | INFO     | __main__:main:90 - 🏗️ PropstackScraper Test Script
+2025-08-09 23:30:21.383 | INFO     | __main__:test_propstack_scraper:43 - Testing PropstackScraper with demo data...
+2025-08-09 23:30:21.384 | WARNING  | data_ingestion.propstack_scraper:__init__:27 - Propstack API key not configured. Using demo data.
+2025-08-09 23:30:21.384 | INFO     | __main__:test_propstack_scraper:49 - Testing scrape_data method...
+2025-08-09 23:30:21.384 | INFO     | data_ingestion.propstack_scraper:scrape_data:41 - Fetching data from Propstack API
+2025-08-09 23:30:21.385 | INFO     | data_ingestion.propstack_scraper:_get_demo_data:272 - Using demo data for Propstack
+2025-08-09 23:30:21.385 | INFO     | __main__:test_propstack_scraper:56 - Retrieved 5 properties from demo data
+2025-08-09 23:30:21.385 | INFO     | __main__:test_propstack_scraper:59 - Testing process_data method...
+2025-08-09 23:30:21.385 | INFO     | data_ingestion.propstack_scraper:process_data:123 - Processed 5 properties
+2025-08-09 23:30:21.386 | INFO     | __main__:test_propstack_scraper:66 - Processed 5 properties
+2025-08-09 23:30:21.386 | INFO     | __main__:test_propstack_scraper:71 - Sample processed property:
+2025-08-09 23:30:21.386 | INFO     | __main__:test_propstack_scraper:73 -   source: Propstack
+2025-08-09 23:30:21.386 | INFO     | __main__:test_propstack_scraper:73 -   source_id: PS001
+2025-08-09 23:30:21.387 | INFO     | __main__:test_propstack_scraper:73 -   property_type: Apartment
+2025-08-09 23:30:21.387 | INFO     | __main__:test_propstack_scraper:73 -   address: Bandra West, Mumbai
+2025-08-09 23:30:21.387 | INFO     | __main__:test_propstack_scraper:73 -   city: Mumbai
+2025-08-09 23:30:21.387 | INFO     | __main__:test_propstack_scraper:73 -   state: Maharashtra
+2025-08-09 23:30:21.388 | INFO     | __main__:test_propstack_scraper:73 -   zip_code: 400050
+2025-08-09 23:30:21.388 | INFO     | __main__:test_propstack_scraper:73 -   price: 15000000.0
+2025-08-09 23:30:21.388 | INFO     | __main__:test_propstack_scraper:73 -   bedrooms: 2
+2025-08-09 23:30:21.388 | INFO     | __main__:test_propstack_scraper:73 -   bathrooms: 2
+2025-08-09 23:30:21.389 | INFO     | __main__:test_propstack_scraper:73 -   sqft: 850.0
+2025-08-09 23:30:21.389 | INFO     | __main__:test_propstack_scraper:73 -   year_built: 2015
+2025-08-09 23:30:21.389 | INFO     | __main__:test_propstack_scraper:73 -   latitude: 19.0596
+2025-08-09 23:30:21.389 | INFO     | __main__:test_propstack_scraper:73 -   longitude: 72.8295
+2025-08-09 23:30:21.390 | INFO     | __main__:test_propstack_scraper:73 -   is_active: True
+2025-08-09 23:30:21.390 | INFO     | __main__:test_propstack_scraper:73 -   monthly_rent: 75000.0
+2025-08-09 23:30:21.390 | INFO     | __main__:test_propstack_scraper:73 -   cap_rate: 6.0
+2025-08-09 23:30:21.390 | INFO     | __main__:test_propstack_scraper:73 -   noi: 900000.0
+2025-08-09 23:30:21.391 | INFO     | __main__:test_propstack_scraper:73 -   amenities: ['Furnishing: Fully Furnished', 'Facing: West', 'Floor: 8', 'Total Floors: 20', 'Swimming Pool', 'Gym', '24x7 Security', 'Power Backup']
+2025-08-09 23:30:21.391 | INFO     | __main__:test_propstack_scraper:76 - Testing save_data method...
+2025-08-09 23:30:21.501 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 401
+2025-08-09 23:30:21.528 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 402
+2025-08-09 23:30:21.533 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 403
+2025-08-09 23:30:21.540 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 404
+2025-08-09 23:30:21.545 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 405
+2025-08-09 23:30:21.593 | INFO     | data_ingestion.propstack_scraper:save_data:262 - Saved 5 new properties and updated 0 existing properties
+2025-08-09 23:30:21.594 | INFO     | __main__:test_propstack_scraper:79 - Successfully saved data to database
+2025-08-09 23:30:21.594 | INFO     | __main__:test_propstack_scraper:83 - ✅ PropstackScraper test completed
+2025-08-09 23:33:08.506 | INFO     | __main__:init_db:36 - Initializing database connection...
+2025-08-09 23:33:08.576 | INFO     | __main__:init_db:38 - Database connection initialized
+2025-08-09 23:33:08.577 | INFO     | __main__:main:90 - 🏗️ PropstackScraper Test Script
+2025-08-09 23:33:08.577 | INFO     | __main__:test_propstack_scraper:43 - Testing PropstackScraper with demo data...
+2025-08-09 23:33:08.577 | WARNING  | data_ingestion.propstack_scraper:__init__:27 - Propstack API key not configured. Using demo data.
+2025-08-09 23:33:08.577 | INFO     | __main__:test_propstack_scraper:49 - Testing scrape_data method...
+2025-08-09 23:33:08.578 | INFO     | data_ingestion.propstack_scraper:scrape_data:41 - Fetching data from Propstack API
+2025-08-09 23:33:08.578 | INFO     | data_ingestion.propstack_scraper:_get_demo_data:272 - Using demo data for Propstack API
+2025-08-09 23:33:08.579 | INFO     | __main__:test_propstack_scraper:56 - Retrieved 5 properties from demo data
+2025-08-09 23:33:08.579 | INFO     | __main__:test_propstack_scraper:59 - Testing process_data method...
+2025-08-09 23:33:08.579 | INFO     | data_ingestion.propstack_scraper:process_data:123 - Processed 5 properties
+2025-08-09 23:33:08.580 | INFO     | __main__:test_propstack_scraper:66 - Processed 5 properties
+2025-08-09 23:33:08.580 | INFO     | __main__:test_propstack_scraper:71 - Sample processed property:
+2025-08-09 23:33:08.580 | INFO     | __main__:test_propstack_scraper:73 -   source: Propstack
+2025-08-09 23:33:08.581 | INFO     | __main__:test_propstack_scraper:73 -   source_id: PS-100000
+2025-08-09 23:33:08.581 | INFO     | __main__:test_propstack_scraper:73 -   property_type: Villa
+2025-08-09 23:33:08.581 | INFO     | __main__:test_propstack_scraper:73 -   address: 52, Sample Street, Gurgaon
+2025-08-09 23:33:08.582 | INFO     | __main__:test_propstack_scraper:73 -   city: Gurgaon
+2025-08-09 23:33:08.582 | INFO     | __main__:test_propstack_scraper:73 -   state: Haryana
+2025-08-09 23:33:08.582 | INFO     | __main__:test_propstack_scraper:73 -   zip_code: 416445
+2025-08-09 23:33:08.582 | INFO     | __main__:test_propstack_scraper:73 -   price: 11830106.0
+2025-08-09 23:33:08.583 | INFO     | __main__:test_propstack_scraper:73 -   bedrooms: 1
+2025-08-09 23:33:08.583 | INFO     | __main__:test_propstack_scraper:73 -   bathrooms: 2
+2025-08-09 23:33:08.583 | INFO     | __main__:test_propstack_scraper:73 -   sqft: 1451.0
+2025-08-09 23:33:08.583 | INFO     | __main__:test_propstack_scraper:73 -   year_built: 2007
+2025-08-09 23:33:08.583 | INFO     | __main__:test_propstack_scraper:73 -   latitude: 28.47336427203372
+2025-08-09 23:33:08.583 | INFO     | __main__:test_propstack_scraper:73 -   longitude: 77.02539140347224
+2025-08-09 23:33:08.584 | INFO     | __main__:test_propstack_scraper:73 -   is_active: True
+2025-08-09 23:33:08.584 | INFO     | __main__:test_propstack_scraper:73 -   monthly_rent: 59150.53
+2025-08-09 23:33:08.584 | INFO     | __main__:test_propstack_scraper:73 -   cap_rate: 4.5
+2025-08-09 23:33:08.584 | INFO     | __main__:test_propstack_scraper:73 -   noi: 709806.36
+2025-08-09 23:33:08.584 | INFO     | __main__:test_propstack_scraper:73 -   amenities: ['Furnishing: Furnished', 'Facing: North', 'Floor: 19', 'Total Floors: 33', 'Security', 'Gym', 'Clubhouse', 'Garden']
+2025-08-09 23:33:08.585 | INFO     | __main__:test_propstack_scraper:76 - Testing save_data method...
+2025-08-09 23:33:08.728 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 406
+2025-08-09 23:33:08.735 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 407
+2025-08-09 23:33:08.740 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 408
+2025-08-09 23:33:08.747 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 409
+2025-08-09 23:33:08.754 | DEBUG    | data_ingestion.propstack_scraper:save_data:255 - Created new property 410
+2025-08-09 23:33:08.789 | INFO     | data_ingestion.propstack_scraper:save_data:262 - Saved 5 new properties and updated 0 existing properties
+2025-08-09 23:33:08.789 | INFO     | __main__:test_propstack_scraper:79 - Successfully saved data to database
+2025-08-09 23:33:08.790 | INFO     | __main__:test_propstack_scraper:83 - ✅ PropstackScraper test completed
+2025-08-10 00:11:34.291 | INFO     | __main__:init_db:36 - Initializing database connection...
+2025-08-10 00:11:34.594 | INFO     | __main__:init_db:38 - Database connection initialized
+2025-08-10 00:11:34.595 | INFO     | __main__:main:90 - 🏗️ PropstackScraper Test Script
+2025-08-10 00:11:34.596 | INFO     | __main__:test_propstack_scraper:43 - Testing PropstackScraper with demo data...
+2025-08-10 00:11:34.597 | WARNING  | data_ingestion.propstack_scraper:__init__:27 - Propstack API key not configured. Using demo data.
+2025-08-10 00:11:34.598 | INFO     | __main__:test_propstack_scraper:49 - Testing scrape_data method...
+2025-08-10 00:11:34.598 | INFO     | data_ingestion.propstack_scraper:scrape_data:41 - Fetching data from Propstack API
+2025-08-10 00:11:34.599 | INFO     | data_ingestion.propstack_scraper:_get_demo_data:272 - Using demo data for Propstack API
+2025-08-10 00:11:34.599 | INFO     | __main__:test_propstack_scraper:56 - Retrieved 5 properties from demo data
+2025-08-10 00:11:34.599 | INFO     | __main__:test_propstack_scraper:59 - Testing process_data method...
+2025-08-10 00:11:34.600 | INFO     | data_ingestion.propstack_scraper:process_data:123 - Processed 5 properties
+2025-08-10 00:11:34.600 | INFO     | __main__:test_propstack_scraper:66 - Processed 5 properties
+2025-08-10 00:11:34.600 | INFO     | __main__:test_propstack_scraper:71 - Sample processed property:
+2025-08-10 00:11:34.601 | INFO     | __main__:test_propstack_scraper:73 -   source: Propstack
+2025-08-10 00:11:34.601 | INFO     | __main__:test_propstack_scraper:73 -   source_id: PS-100000
+2025-08-10 00:11:34.601 | INFO     | __main__:test_propstack_scraper:73 -   property_type: Apartment
+2025-08-10 00:11:34.601 | INFO     | __main__:test_propstack_scraper:73 -   address: 33, Sample Street, Los Angeles
+2025-08-10 00:11:34.602 | INFO     | __main__:test_propstack_scraper:73 -   city: Los Angeles
+2025-08-10 00:11:34.602 | INFO     | __main__:test_propstack_scraper:73 -   state: CA
+2025-08-10 00:11:34.602 | INFO     | __main__:test_propstack_scraper:73 -   zip_code: 912754
+2025-08-10 00:11:34.602 | INFO     | __main__:test_propstack_scraper:73 -   price: 1137695.0
+2025-08-10 00:11:34.603 | INFO     | __main__:test_propstack_scraper:73 -   bedrooms: 5
+2025-08-10 00:11:34.603 | INFO     | __main__:test_propstack_scraper:73 -   bathrooms: 3
+2025-08-10 00:11:34.603 | INFO     | __main__:test_propstack_scraper:73 -   sqft: 1756.0
+2025-08-10 00:11:34.604 | INFO     | __main__:test_propstack_scraper:73 -   year_built: 2008
+2025-08-10 00:11:34.604 | INFO     | __main__:test_propstack_scraper:73 -   latitude: 34.102071702666784
+2025-08-10 00:11:34.604 | INFO     | __main__:test_propstack_scraper:73 -   longitude: -118.22241427580329
+2025-08-10 00:11:34.605 | INFO     | __main__:test_propstack_scraper:73 -   is_active: True
+2025-08-10 00:11:34.605 | INFO     | __main__:test_propstack_scraper:73 -   monthly_rent: 5688.475
+2025-08-10 00:11:34.605 | INFO     | __main__:test_propstack_scraper:73 -   cap_rate: 4.1
+2025-08-10 00:11:34.618 | INFO     | __main__:test_propstack_scraper:73 -   noi: 68261.70000000001
+2025-08-10 00:11:34.619 | INFO     | __main__:test_propstack_scraper:73 -   amenities: ['Furnishing: Unfurnished', 'Facing: West', 'Floor: 4', 'Total Floors: 33', "Children's Play Area", 'Lift', 'Parking', 'Gym', 'Garden', 'Security', 'Clubhouse']
+2025-08-10 00:11:34.619 | INFO     | __main__:test_propstack_scraper:76 - Testing save_data method...
+2025-08-10 00:11:34.695 | DEBUG    | data_ingestion.propstack_scraper:save_data:195 - Updated property 406
+2025-08-10 00:11:34.699 | DEBUG    | data_ingestion.propstack_scraper:save_data:195 - Updated property 407
+2025-08-10 00:11:34.703 | DEBUG    | data_ingestion.propstack_scraper:save_data:195 - Updated property 408
+2025-08-10 00:11:34.706 | DEBUG    | data_ingestion.propstack_scraper:save_data:195 - Updated property 409
+2025-08-10 00:11:34.709 | DEBUG    | data_ingestion.propstack_scraper:save_data:195 - Updated property 410
+2025-08-10 00:11:34.821 | INFO     | data_ingestion.propstack_scraper:save_data:262 - Saved 0 new properties and updated 5 existing properties
+2025-08-10 00:11:34.822 | INFO     | __main__:test_propstack_scraper:79 - Successfully saved data to database
+2025-08-10 00:11:34.822 | INFO     | __main__:test_propstack_scraper:83 - ✅ PropstackScraper test completed

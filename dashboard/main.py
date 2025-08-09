@@ -168,11 +168,11 @@ def main():
         max_price = max_price if max_price > 10000 else 10000
     
     price_range = st.sidebar.slider(
-        "Price Range (₹)",
+        "Price Range ($)",
         min_value=min_price,
         max_value=max_price,
         value=(min_price, max_price),
-        step=100000.0  # Increased step size for Indian prices
+        step=100000.0  # Increased step size
     )
     
     # Deal score filter
@@ -223,7 +223,7 @@ def main():
     
     with col2:
         avg_price = filtered_df['list_price'].mean()
-        st.metric("Avg Price", f"₹{avg_price:,.0f}" if not pd.isna(avg_price) else "N/A")
+        st.metric("Avg Price", f"${avg_price:,.0f}" if not pd.isna(avg_price) else "N/A")
     
     with col3:
         avg_cap_rate = filtered_df['cap_rate'].mean()

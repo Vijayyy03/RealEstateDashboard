@@ -56,6 +56,9 @@ class ScrapingSettings(BaseSettings):
     
     # Zoning data settings
     zoning_enabled: bool = Field(default=True, env="ZONING_ENABLED")
+    
+    # API data collection settings
+    api_enabled: bool = Field(default=True, env="API_DATA_ENABLED")
 
 
 class MLSettings(BaseSettings):
@@ -106,6 +109,10 @@ class ExternalAPISettings(BaseSettings):
     
     # Google Maps API
     google_maps_api_key: Optional[str] = Field(default=None, env="GOOGLE_MAPS_API_KEY")
+    
+    # Propstack API (Indian Real Estate Data)
+    propstack_api_key: Optional[str] = Field(default=None, env="PROPSTACK_API_KEY")
+    propstack_base_url: str = Field(default="https://api.propstack.in/v1", env="PROPSTACK_BASE_URL")
 
 
 class Settings(BaseSettings):
