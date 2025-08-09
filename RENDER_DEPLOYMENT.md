@@ -1,125 +1,260 @@
 # Deploying the Real Estate Investment System on Render
 
-This guide provides instructions for deploying the Real Estate Investment System on Render.com.
+This guide provides comprehensive instructions for deploying the Real Estate Investment System on Render.com with PostgreSQL database support.
 
 ## Prerequisites
 
-1. A [Render account](https://render.com/)
-2. Your code pushed to a Git repository (GitHub, GitLab, etc.)
+1. A [Render](https://render.com) account
+2. Git repository with your Real Estate Investment System code
+3. Basic familiarity with PostgreSQL and web services
+
+## Files Overview
+
+The following files are configured for Render deployment:
+
+- `render.yaml` - Blueprint configuration for automated deployment
+- `Procfile` - Process definitions for web services
+- `runtime.txt` - Python version specification
+- `requirements.txt` - Python dependencies
+- `scripts/init_render_db.py` - Database initialization script
+- `scripts/init_render.sh` - Shell script for database setup
+- `.gitignore` - Excludes unnecessary files from deployment
 
 ## Deployment Options
 
-There are two ways to deploy this application on Render:
+You have two options for deploying on Render:
 
-1. **Manual Deployment**: Deploy each service individually through the Render Dashboard
-2. **Blueprint Deployment**: Use the `render.yaml` file for automatic deployment
+1. **Blueprint Deployment** (Recommended): Use the `render.yaml` file for automated deployment
+2. **Manual Deployment**: Deploy each service individually through the Render Dashboard
 
-## Option 1: Manual Deployment
+## Option 1: Blueprint Deployment (Recommended)
 
-### Step 1: Deploy the PostgreSQL Database
+### Step 1: Prepare Your Repository
+
+1. Ensure all deployment files are in your repository:
+   - `render.yaml`
+   - `Procfile`
+   - `runtime.txt`
+   - `requirements.txt`
+   - `scripts/init_render_db.py`
+   - `scripts/init_render.sh`
+
+2. Commit and push all changes to your Git repository
+
+### Step 2: Deploy via Blueprint
 
 1. Log in to your Render account
-2. Navigate to the Dashboard and click on "New" > "PostgreSQL"
+2. Navigate to the **New** dropdown and select **Blueprint**
+3. Connect your Git repository
+4. Select the branch containing your code (usually `main`)
+5. Review the services that will be created:
+   - PostgreSQL database (`real-estate-db`)
+   - API service (`real-estate-api`)
+   - Dashboard service (`real-estate-dashboard`)
+6. Click **Apply Blueprint**
+
+Render will automatically:
+- Create a PostgreSQL database with PostGIS support
+- Deploy the API service with Gunicorn and Uvicorn
+- Deploy the Streamlit dashboard
+- Run the database initialization script
+
+## Option 2: Manual Deployment
+
+### Step 1: Create a PostgreSQL Database
+
+1. Log in to your Render account
+2. Navigate to the **New** dropdown and select **PostgreSQL**
 3. Configure your database:
-   - Name: `real-estate-db`
-   - Database: `real_estate_db`
-   - User: `real_estate_user`
-   - Region: Choose the region closest to your users
-   - Plan: Select an appropriate plan (Free tier is available)
-4. Click "Create Database"
-5. Once created, note the "Internal Database URL" for the next steps
+   - **Name**: `real-estate-db`
+   - **Database**: `real_estate_db`
+   - **User**: `real_estate_user`
+   - **Plan**: Starter (or higher based on needs)
+   - **Region**: Choose the region closest to your users
+   - **PostgreSQL Version**: 15
+4. Click **Create Database**
+5. Once created, note the **Internal Database URL** for later use
 
 ### Step 2: Deploy the API Service
 
-1. In the Render Dashboard, click on "New" > "Web Service"
+1. Navigate to the **New** dropdown and select **Web Service**
 2. Connect your Git repository
 3. Configure the service:
-   - Name: `real-estate-api`
-   - Environment: `Python`
-   - Region: Same as your database
-   - Branch: `main` (or your preferred branch)
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `uvicorn api.main:app --host 0.0.0.0 --port $PORT`
+   - **Name**: `real-estate-api`
+   - **Environment**: Python
+   - **Region**: Same as your database
+   - **Branch**: `main` (or your preferred branch)
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn -w 4 -k uvicorn.workers.UvicornWorker api.main:app --bind 0.0.0.0:$PORT`
+   - **Plan**: Starter (or higher based on needs)
 4. Add the following environment variables:
-   - `ENVIRONMENT`: `production`
    - `DATABASE_URL`: Paste the Internal Database URL from Step 1
+   - `ENVIRONMENT`: `production`
+   - `API_HOST`: `0.0.0.0`
+   - `API_PORT`: `$PORT`
+   - `PYTHON_VERSION`: `3.9.18`
    - `API_DATA_ENABLED`: `true`
-5. Click "Create Web Service"
+5. Click **Create Web Service**
 
 ### Step 3: Deploy the Dashboard Service
 
-1. In the Render Dashboard, click on "New" > "Web Service"
-2. Connect your Git repository (same as before)
+1. Navigate to the **New** dropdown and select **Web Service**
+2. Connect your Git repository (same as API)
 3. Configure the service:
-   - Name: `real-estate-dashboard`
-   - Environment: `Python`
-   - Region: Same as your database
-   - Branch: `main` (or your preferred branch)
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `streamlit run dashboard/main.py --server.port $PORT --server.address 0.0.0.0`
-4. Add the same environment variables as the API service
-5. Click "Create Web Service"
-
-## Option 2: Blueprint Deployment
-
-1. Ensure your repository contains the `render.yaml` file
-2. In the Render Dashboard, click on "New" > "Blueprint"
-3. Connect your Git repository
-4. Render will automatically detect the `render.yaml` file and create all services defined in it
-5. Review the configuration and click "Apply"
+   - **Name**: `real-estate-dashboard`
+   - **Environment**: Python
+   - **Region**: Same as your database
+   - **Branch**: `main` (or your preferred branch)
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `streamlit run dashboard/main.py --server.port $PORT --server.address 0.0.0.0 --server.headless true --server.enableCORS false`
+   - **Plan**: Starter (or higher based on needs)
+4. Add the following environment variables:
+   - `DATABASE_URL`: Paste the Internal Database URL from Step 1
+   - `ENVIRONMENT`: `production`
+   - `API_URL`: URL of your API service (e.g., `https://real-estate-api.onrender.com`)
+   - `PYTHON_VERSION`: `3.9.18`
+5. Click **Create Web Service**
 
 ## Post-Deployment Steps
 
 ### Initialize the Database
 
-1. Once all services are deployed, go to the `real-estate-api` service in the Render Dashboard
-2. Navigate to the "Shell" tab
-3. Run the following command to initialize the database:
-   ```
-   python database/setup_db.py
-   ```
-4. Generate sample data (optional):
-   ```
-   python scripts/sample_data.py
+After deployment, initialize the database with tables and sample data:
+
+#### For Blueprint Deployment:
+The database initialization runs automatically via the `postDeploy` hook in `render.yaml`.
+
+#### For Manual Deployment:
+1. Access your API service shell in the Render dashboard
+2. Run the initialization script:
+   ```bash
+   python scripts/init_render_db.py
    ```
 
 ### Verify Deployment
 
-1. Access the API at `https://real-estate-api.onrender.com/docs`
-2. Access the Dashboard at `https://real-estate-dashboard.onrender.com`
+1. **API Health Check**: Visit `https://your-api-service.onrender.com/health`
+2. **API Documentation**: Visit `https://your-api-service.onrender.com/docs` for Swagger UI
+3. **Dashboard**: Visit `https://your-dashboard-service.onrender.com`
+4. **Test Endpoints**: Try a few API endpoints to ensure database connectivity
+
+## Environment Variables
+
+### Required Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|----------|
+| `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@host:port/db` |
+| `ENVIRONMENT` | Application environment | `production` |
+| `PYTHON_VERSION` | Python runtime version | `3.9.18` |
+
+### Optional Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|----------|
+| `API_HOST` | API server host | `0.0.0.0` |
+| `API_PORT` | API server port | `$PORT` |
+| `API_DATA_ENABLED` | Enable data ingestion features | `true` |
+| `API_URL` | API service URL (for dashboard) | Auto-detected |
+| `DASHBOARD_URL` | Dashboard URL (for API) | Auto-detected |
 
 ## Troubleshooting
 
 ### Database Connection Issues
 
-If you encounter database connection issues:
+**Symptoms**: Application fails to start, database connection errors
 
+**Solutions**:
 1. Verify the `DATABASE_URL` environment variable is correctly set
-2. Check that the database service is running
-3. Ensure the database URL format is correct (should start with `postgresql://`)
+2. Check if the database service is running in the Render dashboard
+3. Ensure the database and web services are in the same region
+4. Check database logs for connection issues
 
-### Application Errors
+### Application Startup Errors
 
-1. Check the service logs in the Render Dashboard
+**Symptoms**: Service fails to start, build errors
+
+**Solutions**:
+1. Check the service logs in the Render dashboard
 2. Verify all required environment variables are set
-3. Ensure the database is properly initialized
+3. Ensure `requirements.txt` includes all dependencies
+4. Check Python version compatibility (3.9.x recommended)
+5. Verify the start command syntax in `Procfile`
 
-### Streamlit Dashboard Issues
+### Dashboard Not Loading
 
-If the Streamlit dashboard doesn't load:
+**Symptoms**: Dashboard shows errors, blank page, or connection issues
 
-1. Check that the `STREAMLIT_SERVER_ADDRESS` is set to `0.0.0.0`
-2. Verify the `PORT` environment variable is being used correctly
-3. Check the service logs for any Streamlit-specific errors
+**Solutions**:
+1. Check if the API service is running and accessible
+2. Verify the `API_URL` environment variable points to the correct API service
+3. Check Streamlit service logs for specific errors
+4. Ensure CORS settings are properly configured
 
-## Scaling and Monitoring
+### Performance Issues
 
-- Render provides automatic scaling for paid plans
-- Monitor your application's performance in the Render Dashboard
-- Set up alerts for service health and performance
+**Symptoms**: Slow response times, timeouts
+
+**Solutions**:
+1. Upgrade to a higher-tier plan for more resources
+2. Optimize database queries and add indexes
+3. Consider implementing caching strategies
+4. Monitor resource usage in the Render dashboard
+
+### Build Failures
+
+**Symptoms**: Deployment fails during build phase
+
+**Solutions**:
+1. Check for syntax errors in `requirements.txt`
+2. Ensure all dependencies are compatible with Python 3.9
+3. Verify file paths and imports are correct
+4. Check build logs for specific error messages
+
+## Monitoring and Maintenance
+
+### Monitoring
+
+- **Service Health**: Use the `/health` endpoint for API monitoring
+- **Logs**: Monitor service logs in the Render dashboard
+- **Metrics**: Track resource usage and performance metrics
+- **Alerts**: Set up alerts for service failures or high resource usage
+
+### Maintenance Tasks
+
+- **Dependencies**: Regularly update Python packages in `requirements.txt`
+- **Database**: Monitor database performance and storage usage
+- **Backups**: Ensure database backups are configured and tested
+- **Security**: Keep dependencies updated for security patches
+
+### Scaling
+
+- **Vertical Scaling**: Upgrade to higher-tier plans for more CPU/memory
+- **Horizontal Scaling**: Use Render's auto-scaling features (available on higher plans)
+- **Database Scaling**: Upgrade database plan as data grows
+
+## Cost Optimization
+
+- **Free Tier**: Use free tier for development/testing
+- **Starter Plans**: Suitable for small to medium applications
+- **Resource Monitoring**: Monitor usage to avoid unnecessary costs
+- **Sleep Mode**: Services on free tier sleep after inactivity
+
+## Security Best Practices
+
+- **Environment Variables**: Never commit secrets to your repository
+- **Database Access**: Use strong passwords and limit IP access if needed
+- **HTTPS**: All Render services use HTTPS by default
+- **Dependencies**: Keep all packages updated for security
+
+---
 
 ## Additional Resources
 
 - [Render Documentation](https://render.com/docs)
-- [Streamlit Deployment Guide](https://docs.streamlit.io/knowledge-base/deploy/)
-- [FastAPI Deployment](https://fastapi.tiangolo.com/deployment/)
+- [PostgreSQL on Render](https://render.com/docs/databases)
+- [Python on Render](https://render.com/docs/python)
+- [Environment Variables](https://render.com/docs/environment-variables)
+- [Blueprints](https://render.com/docs/blueprint-spec)
+
+For technical support, contact your system administrator or refer to the Render support documentation.
