@@ -1,0 +1,40 @@
+# Core packages
+python-dotenv
+pydantic
+pydantic-settings
+
+# Web Framework
+fastapi
+uvicorn
+
+# Database
+sqlalchemy
+alembic
+
+# Data Processing
+pandas
+numpy
+
+# Machine Learning
+scikit-learn
+joblib
+xgboost
+lightgbm
+
+# Web Scraping
+beautifulsoup4
+requests
+
+# Dashboard
+streamlit
+plotly
+
+# Utilities
+loguru
+python-multipart
+aiofiles
+httpx
+
+# Testing
+pytest
+pytest-asyncio
