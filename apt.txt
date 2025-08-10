@@ -1,6 +1,7 @@
 gdal-bin
 libgdal-dev
 libgeos-dev
+libspatialindex-dev
 build-essential
 python3-dev
 python3-pip
@@ -10,3 +11,5 @@ libatlas-base-dev
 libffi-dev
 libpq-dev
 libssl-dev
+proj-bin
+libproj-dev
